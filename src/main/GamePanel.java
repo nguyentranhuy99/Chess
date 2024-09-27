@@ -13,12 +13,21 @@ public class GamePanel extends Panel {
     BufferedImage board, queue;
     double boardScale = 1;
     public int [][] Board = new int[8][8];
+
+    public MouseHandle [][] mouseHandles = new MouseHandle[8][8];
+
     King king1, king2;
 
     public GamePanel(Frame frame) {
         super(frame);
         this.menuButton = new MenuButton(this,0,0,2 * tileSize,tileSize);
         this.setBackground(Color.BLACK);
+        for (int i = 0; i < 8; i++ ) {
+            for (int j = 0; j < 8; j++) {
+                mouseHandles[i][j] = new MouseHandle((j + 4) * tileSize, (i + 2) * tileSize, tileSize, tileSize);
+                this.addMouseListener(mouseHandles[i][j]);
+            }
+        }
         this.king1 = new King(this, 4 * tileSize,  2 * tileSize);
         this.king2 = new King(this, 5 * tileSize,  2 * tileSize);
         getImage();
